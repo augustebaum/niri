@@ -322,6 +322,17 @@ async fn process(ctx: &ClientCtx, request: Request) -> Reply {
             let window = windows.values().find(|win| win.is_focused).cloned();
             Response::FocusedWindow(window)
         }
+        Request::PointerPosition => {
+            let (tx, rx) = async_channel::bounded(1);
+
+            ctx.event_loop.insert_idle(move |state| {
+                let position = state.niri.get_cursor_location();
+                let _ = tx.send_blocking(position);
+            });
+
+            let pointer_position = rx.recv().await;
+            Response::PointerPosition(pointer_position.to_string())
+        }
         Request::Action(action) => {
             let (tx, rx) = async_channel::bounded(1);
 

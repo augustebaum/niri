@@ -72,6 +72,8 @@ pub enum Msg {
     FocusedOutput,
     /// Print information about the focused window.
     FocusedWindow,
+    /// Get the position of the pointer.
+    PointerPosition,
     /// Perform an action.
     Action {
         #[command(subcommand)]

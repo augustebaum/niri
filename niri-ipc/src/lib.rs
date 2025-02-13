@@ -63,6 +63,8 @@ pub enum Request {
     FocusedOutput,
     /// Request information about the focused window.
     FocusedWindow,
+    /// Request the current pointer position.
+    PointerPosition,
     /// Perform an action.
     Action(Action),
     /// Change output configuration temporarily.
@@ -129,6 +131,8 @@ pub enum Response {
     FocusedOutput(Option<Output>),
     /// Information about the focused window.
     FocusedWindow(Option<Window>),
+    /// Information about the pointer position.
+    PointerPosition(String),
     /// Output configuration change result.
     OutputConfigChanged(OutputConfigChanged),
 }

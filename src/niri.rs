@@ -667,6 +667,12 @@ impl State {
         }
     }
 
+    pub fn get_cursor_location(&self) -> Point<f64, Logical> {
+        let pointer = &self.niri.seat.get_pointer().unwrap();
+        pointer.current_location()
+    }
+
+    /// Moves pointer to a specifed location
     pub fn move_cursor(&mut self, location: Point<f64, Logical>) {
         let under = self.niri.contents_under(location);
         self.niri.pointer_contents.clone_from(&under);

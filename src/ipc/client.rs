@@ -19,6 +19,7 @@ pub fn handle_msg(msg: Msg, json: bool) -> anyhow::Result<()> {
         Msg::Outputs => Request::Outputs,
         Msg::FocusedWindow => Request::FocusedWindow,
         Msg::FocusedOutput => Request::FocusedOutput,
+        Msg::PointerPosition => Request::PointerPosition,
         Msg::Action { action } => Request::Action(action.clone()),
         Msg::Output { output, action } => Request::Output {
             output: output.clone(),
@@ -251,6 +252,9 @@ pub fn handle_msg(msg: Msg, json: bool) -> anyhow::Result<()> {
             } else {
                 println!("No output is focused.");
             }
+        }
+        Msg::PointerPosition => {
+            println!("hello");
         }
         Msg::Action { .. } => {
             let Response::Handled = response else {
